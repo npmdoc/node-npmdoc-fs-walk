@@ -1,0 +1,347 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+        href="https://github.com/confcompass/fs-walk#readme"
+
+    >fs-walk (v0.0.1)</a>
+</h1>
+<h4>Synchronous and asynchronous recursive directory listing for node</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.fs-walk">module fs-walk</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.fs-walk.dirs">
+            function <span class="apidocSignatureSpan">fs-walk.</span>dirs
+            <span class="apidocSignatureSpan">(dir, iterator, callback)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.fs-walk.dirsSync">
+            function <span class="apidocSignatureSpan">fs-walk.</span>dirsSync
+            <span class="apidocSignatureSpan">(dir, iterator)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.fs-walk.files">
+            function <span class="apidocSignatureSpan">fs-walk.</span>files
+            <span class="apidocSignatureSpan">(dir, iterator, callback)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.fs-walk.filesSync">
+            function <span class="apidocSignatureSpan">fs-walk.</span>filesSync
+            <span class="apidocSignatureSpan">(dir, iterator)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.fs-walk.walk">
+            function <span class="apidocSignatureSpan">fs-walk.</span>walk
+            <span class="apidocSignatureSpan">(dir, iterator, callback)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.fs-walk.walkSync">
+            function <span class="apidocSignatureSpan">fs-walk.</span>walkSync
+            <span class="apidocSignatureSpan">(dir, iterator)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.fs-walk" id="apidoc.module.fs-walk">module fs-walk</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.fs-walk.dirs" id="apidoc.element.fs-walk.dirs">
+        function <span class="apidocSignatureSpan">fs-walk.</span>dirs
+        <span class="apidocSignatureSpan">(dir, iterator, callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">dirs = function (dir, iterator, callback) {
+  walk(dir, function(root, file, stat, next) {
+    if (stat.isDirectory()) {
+      iterator(root, file, stat, next);
+    } else {
+      next();
+    }
+  }, callback);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+walk.files(&#x27;/etc&#x27;, function(basedir, filename, stat, next) {
+	fs.chmod(path.join(basedir, filename), 0644, next);
+}, function(err) {
+    if (err) console.log(err);
+});
+
+walk.<span class="apidocCodeKeywordSpan">dirs</span>(&#x27;/etc&#x27;, function(basedir, filename, stat, next) {
+	fs.chmod(path.join(basedir, filename), 0755, next);
+}, function(err) {
+    if (err) console.log(err);
+});
+```
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.fs-walk.dirsSync" id="apidoc.element.fs-walk.dirsSync">
+        function <span class="apidocSignatureSpan">fs-walk.</span>dirsSync
+        <span class="apidocSignatureSpan">(dir, iterator)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">dirsSync = function (dir, iterator) {
+    walkSync(dir, function(root, file, stat) {
+        if (stat.isDirectory()) {
+            iterator(root, file, stat);
+        }
+    });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.fs-walk.files" id="apidoc.element.fs-walk.files">
+        function <span class="apidocSignatureSpan">fs-walk.</span>files
+        <span class="apidocSignatureSpan">(dir, iterator, callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">files = function (dir, iterator, callback) {
+  walk(dir, function(root, file, stat, next) {
+    if (stat.isFile()) {
+      iterator(root, file, stat, next);
+    } else {
+      next();
+    }
+  }, callback);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+```
+
+Two convenience functions are provided for convenience, `walk.files` and `walk.dirs` (and their synchronous counterparts) to walk
+ through files and directories.
+
+```
+var walk = require(&#x27;fs-walk&#x27;);
+
+walk.<span class="apidocCodeKeywordSpan">files</span>(&#x27;/etc&#x27;, function(basedir, filename, stat, next) {
+	fs.chmod(path.join(basedir, filename), 0644, next);
+}, function(err) {
+    if (err) console.log(err);
+});
+
+walk.dirs(&#x27;/etc&#x27;, function(basedir, filename, stat, next) {
+	fs.chmod(path.join(basedir, filename), 0755, next);
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.fs-walk.filesSync" id="apidoc.element.fs-walk.filesSync">
+        function <span class="apidocSignatureSpan">fs-walk.</span>filesSync
+        <span class="apidocSignatureSpan">(dir, iterator)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">filesSync = function (dir, iterator) {
+    walkSync(dir, function(root, file, stat) {
+        if (stat.isFile()) {
+            iterator(root, file, stat);
+        }
+    });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.fs-walk.walk" id="apidoc.element.fs-walk.walk">
+        function <span class="apidocSignatureSpan">fs-walk.</span>walk
+        <span class="apidocSignatureSpan">(dir, iterator, callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">walk = function (dir, iterator, callback) {
+  var dirs = [dir];
+
+  async.whilst(
+    function() { return dirs.length },
+    function(nextd) {
+      var dir = dirs.shift();
+      async.waterfall([
+        function(nextrd) {
+          fs.readdir(dir, nextrd);
+        },
+        function(files, nextf) {
+          async.each(files, function(file, nexts) {
+            var f = path.join(dir, file);
+            fs.stat(f, function(err, stat) {
+              if (stat &#x26;&#x26; stat.isDirectory()) {
+                dirs.push(f);
+              }
+              if (stat) {
+                iterator(dir, file, stat, nexts);
+              }
+            });
+          }, nextf);
+        }
+      ],
+      nextd);
+    },
+    callback);
+
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+## Usage
+
+To asynchronously walk the `/etc` directory, and for example, change the file and directory permissions, do:
+
+```
+var walk = require(&#x27;fs-walk&#x27;);
+
+walk.<span class="apidocCodeKeywordSpan">walk</span>(&#x27;/etc&#x27;, function(basedir, filename, stat, next) {
+	var perm = stat.isDirectory() ? 0755 : 0644;
+    fs.chmod(path.join(basedir, filename), perm, next);
+}, function(err) {
+    if (err) console.log(err);
+});
+```
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.fs-walk.walkSync" id="apidoc.element.fs-walk.walkSync">
+        function <span class="apidocSignatureSpan">fs-walk.</span>walkSync
+        <span class="apidocSignatureSpan">(dir, iterator)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">walkSync = function (dir, iterator) {
+    var dirs = [dir];
+
+    while (dirs.length) {
+        var dir = dirs.shift();
+        var files = fs.readdirSync(dir);
+        files.forEach(function(file) {
+            var f = path.join(dir, file);
+            var stat = fs.statSync(f);
+            if (stat &#x26;&#x26; stat.isDirectory()) {
+                dirs.push(f);
+            }
+            if (stat) {
+                iterator(dir, file, stat);
+            }
+        });
+    }
+
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+```
+
+You can achieve the same result, synchronously:
+
+```
+var walk = require(&#x27;fs-walk&#x27;);
+
+walk.<span class="apidocCodeKeywordSpan">walkSync</span>(&#x27;/etc&#x27;, function(basedir, filename, stat) {
+	var perm = stat.isDirectory() ? 0755 : 0644;
+    fs.chmodSync(path.join(basedir, filename), perm, next);
+});
+```
+
+Two convenience functions are provided for convenience, `walk.files` and `walk.dirs` (and their synchronous counterparts) to walk
+ through files and directories.
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
